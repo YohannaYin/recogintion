@@ -76,12 +76,12 @@ def crop_validate(path,result_folder):
         img = (img / 255.).astype(np.float32)
 
 if __name__ == '__main__':
-    # aligned_db_folder_train = "/mnt/datasets/WebFace/first_round/first_round_train/"
+    aligned_db_folder_train = "/mnt/datasets/WebFace/first_round/first_round_train/"
     aligned_db_folder_test = "/mnt/datasets/WebFace/first_round/first_round_test/"
     aligned_db_folder_validate = "/mnt/datasets/WebFace/first_round/first_round_validate/"
-    # train_folder = "/home/kesci/input/align/train/crop_images_DB"
-    test_folder = "/home/kesci/input/align/test/crop_images_DB"
-    validate_folder = "/home/kesci/input/align/validate/crop_images_DB"
-    # crop_train(aligned_db_folder_train,train_folder)
+    train_folder = "/home/kesci/work/align/train/crop_images_DB"
+    test_folder = "/home/kesci/work/align/test/crop_images_DB"
+    validate_folder = "/home/kesci/work/align/validate/crop_images_DB"
+    crop_train(aligned_db_folder_train,train_folder)
     crop_test(aligned_db_folder_test,test_folder)
     crop_validate(aligned_db_folder_validate,validate_folder)
