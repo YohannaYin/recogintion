@@ -62,7 +62,7 @@ def crop_validate(path,result_folder):
         img = load_image(img_path)
         rect = alignment.getAllFaceBoundingBoxes(img)
         if rect:
-            img = align_image(imggi)
+            img = align_image(img)
         else:
             img = cv2.resize(img, (250, 250), interpolation=cv2.INTER_CUBIC)
             img = img[77:173, 77:173]
