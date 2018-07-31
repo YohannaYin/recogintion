@@ -27,9 +27,7 @@ def crop_train(path,result_folder):
         rect = alignment.getAllFaceBoundingBoxes(img)
         if rect:
             img = align_image(img)
-        else:
-            img = cv2.resize(img, (250, 250), interpolation=cv2.INTER_CUBIC)
-            img = img[77:173, 77:173]
+        img = cv2.resize(img, (55, 47), interpolation=cv2.INTER_CUBIC)
         impt = img_path.split("/mnt/datasets/WebFace/first_round/first_round_train/")[1]
         label = impt.split("/")[0]
         dest_file_path = os.path.join(result_folder,impt)
@@ -47,9 +45,7 @@ def crop_test(path,result_folder):
         rect = alignment.getAllFaceBoundingBoxes(img)
         if rect:
             img = align_image(img)
-        else:
-            img = cv2.resize(img, (250, 250), interpolation=cv2.INTER_CUBIC)
-            img = img[77:173, 77:173]
+        img = cv2.resize(img, (55,47), interpolation=cv2.INTER_CUBIC)
         impt = img_path.split("/mnt/datasets/WebFace/first_round/first_round_test/")[1]
         dest_file_path = os.path.join(result_folder,impt)
         cv2.imwrite(dest_file_path, img)
@@ -63,9 +59,7 @@ def crop_validate(path,result_folder):
         rect = alignment.getAllFaceBoundingBoxes(img)
         if rect:
             img = align_image(img)
-        else:
-            img = cv2.resize(img, (250, 250), interpolation=cv2.INTER_CUBIC)
-            img = img[77:173, 77:173]
+        img = cv2.resize(img, (55, 47), interpolation=cv2.INTER_CUBIC)
         impt = img_path.split("/mnt/datasets/WebFace/first_round/first_round_validate/")[1]
         label = impt.split("/")[0]
         dest_file_path = os.path.join(result_folder,impt)
