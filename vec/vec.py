@@ -28,17 +28,34 @@ def read_list_pair_file(pair_file):
             y.append(int(label))
     return np.asarray(x1, dtype='float32'), np.asarray(x2, dtype='float32'), np.asarray(y, dtype='int32')
 
-def load_data():
-    with open('/home/kesci/work/dataset.pkl', 'rb') as f:
+def load_testX1():
+    with open('/home/kesci/work/testX1.pkl', 'rb') as f:
         testX1 = pickle.load(f)
+        return testX1
+def load_testX2():
+    with open('/home/kesci/work/testX2.pkl', 'rb') as f:
         testX2 = pickle.load(f)
+        return testX2
+def load_testY():
+    with open('/home/kesci/work/testY.pkl', 'rb') as f:
         testY  = pickle.load(f)
+        return testY
+def load_validY():
+    with open('/home/kesci/work/validX.pkl', 'rb') as f:
         validX = pickle.load(f)
+        return validX
+def load_validY():
+    with open('/home/kesci/work/validY.pkl', 'rb') as f:
         validY = pickle.load(f)
+        return validY
+def load_trainX():
+    with open('/home/kesci/work/trainX.pkl', 'rb') as f:
         trainX = pickle.load(f)
+        return trainX
+def load_trainY():
+    with open('/home/kesci/work/trainY.pkl', 'rb') as f:
         trainY = pickle.load(f)
-        return testX1, testX2, testY, validX, validY, trainX, trainY
-
+        return trainY
 if __name__ == '__main__':
     testX1, testX2, testY = read_list_pair_file('/home/kesci/work/test_pair.list')
     validX, validY = read_list_file('/home/kesci/work/val.list')
@@ -47,11 +64,17 @@ if __name__ == '__main__':
     print(testX1.shape, testX2.shape, testY.shape)
     print(validX.shape, validY.shape)
     print(trainX.shape, trainY.shape)
-    with open('/home/kesci/work/dataset.pkl', 'wb') as f:
+    with open('/home/kesci/work/testX1.pkl', 'wb') as f:
         pickle.dump(testX1, f, pickle.HIGHEST_PROTOCOL)
+    with open('/home/kesci/work/testX2.pkl', 'wb') as f:
         pickle.dump(testX2, f, pickle.HIGHEST_PROTOCOL)
+    with open('/home/kesci/work/testY.pkl', 'wb') as f:
         pickle.dump(testY , f, pickle.HIGHEST_PROTOCOL)
+    with open('/home/kesci/work/validX.pkl', 'wb') as f:
         pickle.dump(validX, f, pickle.HIGHEST_PROTOCOL)
+    with open('/home/kesci/work/validY.pkl', 'wb') as f:
         pickle.dump(validY, f, pickle.HIGHEST_PROTOCOL)
+    with open('/home/kesci/work/trainX.pkl', 'wb') as f:
         pickle.dump(trainX, f, pickle.HIGHEST_PROTOCOL)
+    with open('/home/kesci/work/trainY.pkl', 'wb') as f:
         pickle.dump(trainY, f, pickle.HIGHEST_PROTOCOL)
