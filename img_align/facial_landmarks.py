@@ -42,7 +42,7 @@ def crop_train(path,result_folder):
 def crop_test(path,result_folder):
     metadata = load.load_metadata_test(path)
     for i, m in enumerate(metadata):
-        img_path = m.image_path()
+        img_path = m
         img = load_image(img_path)
         rect = alignment.getAllFaceBoundingBoxes(img)
         if rect:
