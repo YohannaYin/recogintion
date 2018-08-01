@@ -17,7 +17,7 @@ def load_image(path):
     # in BGR order. So we need to reverse them
     return img[...,::-1]
 def align_image(img):
-    return alignment.align(96, img, alignment.getLargestFaceBoundingBox(img),
+    return alignment.align(128, img, alignment.getLargestFaceBoundingBox(img),
                            landmarkIndices=AlignDlib.OUTER_EYES_AND_NOSE)
 def crop_train(path,result_folder):
     metadata = load.load_metadata_train(path)
@@ -27,7 +27,8 @@ def crop_train(path,result_folder):
         rect = alignment.getAllFaceBoundingBoxes(img)
         if rect:
             img = align_image(img)
-        img = cv2.resize(img, (55, 47), interpolation=cv2.INTER_CUBIC)
+        else:
+            img = cv2.resize(img, (128, 128), interpolation=cv2.INTER_CUBIC)
         impt = img_path.split("/mnt/datasets/WebFace/first_round/first_round_train/")[1]
         label = impt.split("/")[0]
         dest_file_path = os.path.join(result_folder,impt)
