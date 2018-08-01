@@ -20,6 +20,8 @@ def align_image(img):
     return alignment.align(128, img, alignment.getLargestFaceBoundingBox(img),
                            landmarkIndices=AlignDlib.OUTER_EYES_AND_NOSE)
 def crop_train(path,result_folder):
+    if not os.path.exists(result_folder):
+        os.mkdir(result_folder)
     metadata = load.load_metadata_train(path)
     for i, m in enumerate(metadata):
         img_path = m.image_path()
@@ -36,9 +38,11 @@ def crop_train(path,result_folder):
         if not os.path.exists(label_path):
             os.mkdir(label_path)
         cv2.imwrite(dest_file_path, img)
-        img = (img / 255.).astype(np.float32)
+        # img = (img / 255.).astype(np.float32)
 
 def crop_test(path,result_folder):
+    if not os.path.exists(result_folder):
+        os.mkdir(result_folder)
     metadata = load.load_metadata_test(path)
     for i, m in enumerate(metadata):
         img_path = m
@@ -46,13 +50,16 @@ def crop_test(path,result_folder):
         rect = alignment.getAllFaceBoundingBoxes(img)
         if rect:
             img = align_image(img)
-        img = cv2.resize(img, (55,47), interpolation=cv2.INTER_CUBIC)
+        else:
+            img = cv2.resize(img, (128,128), interpolation=cv2.INTER_CUBIC)
         impt = img_path.split("/mnt/datasets/WebFace/first_round/first_round_test/")[1]
         dest_file_path = os.path.join(result_folder,impt)
         cv2.imwrite(dest_file_path, img)
-        img = (img / 255.).astype(np.float32)
+        # img = (img / 255.).astype(np.float32)
 
 def crop_validate(path,result_folder):
+    if not os.path.exists(result_folder):
+        os.mkdir(result_folder)
     metadata = load.load_metadata_validate(path)
     for i, m in enumerate(metadata):
         img_path = m.image_path()
@@ -60,7 +67,8 @@ def crop_validate(path,result_folder):
         rect = alignment.getAllFaceBoundingBoxes(img)
         if rect:
             img = align_image(img)
-        img = cv2.resize(img, (55, 47), interpolation=cv2.INTER_CUBIC)
+        else:
+            img = cv2.resize(img, (128, 128), interpolation=cv2.INTER_CUBIC)
         impt = img_path.split("/mnt/datasets/WebFace/first_round/first_round_validate/")[1]
         label = impt.split("/")[0]
         dest_file_path = os.path.join(result_folder,impt)
@@ -68,15 +76,17 @@ def crop_validate(path,result_folder):
         if not os.path.exists(label_path):
             os.mkdir(label_path)
         cv2.imwrite(dest_file_path, img)
-        img = (img / 255.).astype(np.float32)
+        # img = (img / 255.).astype(np.float32)
 
 if __name__ == '__main__':
     aligned_db_folder_train = "/mnt/datasets/WebFace/first_round/first_round_train/"
     aligned_db_folder_test = "/mnt/datasets/WebFace/first_round/first_round_test/"
     aligned_db_folder_validate = "/mnt/datasets/WebFace/first_round/first_round_validate/"
-    train_folder = "/home/kesci/work/align/train/crop_images_DB"
-    test_folder = "/home/kesci/work/align/test/crop_images_DB"
-    validate_folder = "/home/kesci/work/align/validate/crop_images_DB"
+    train_folder = "/home/kesci/work/align/train"
+    test_folder = "/home/kesci/work/align/test"
+    validate_folder = "/home/kesci/work/align/validate"
+    if not os.path.exists("/home/kesci/work/align"):
+        os.mkdir("/home/kesci/work/align")
     crop_train(aligned_db_folder_train,train_folder)
     crop_test(aligned_db_folder_test,test_folder)
     crop_validate(aligned_db_folder_validate,validate_folder)
