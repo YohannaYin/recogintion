@@ -7,10 +7,10 @@ from multiprocessing import cpu_count
 # from utils import *
 
 class MyReader:
-    def __init__(self, imageSize, center_crop_size = 128):
+    def __init__(self, imageSize, center_crop_size = 64):
         self.imageSize = imageSize
         self.center_crop_size = center_crop_size
-        self.default_image_size = 128
+        self.default_image_size = 64
 
     def train_mapper(self, sample):
         '''
@@ -45,19 +45,19 @@ class MyReader:
 
         return img.flatten().astype('float32'), label
 
-    def test_mapper(self, sample):
-        '''
-        map image path to type needed by model input layer for the test set
-        '''
-        img1, img2= sample
-        img1 = paddle.image.load_image(img1)
-        img1 = paddle.image.center_crop(img1, 128, is_color=True)
-        img2 = paddle.image.load_image(img2)
-        img3 = paddle.image.center_crop(img2, 128, is_color=True)
-
-        img1 = cv2.resize(img1, (self.imageSize, self.imageSize))
-        img2 = cv2.resize(img2, (self.imageSize, self.imageSize))
-        return img1.flatten().astype('float32'), img1.flatten().astype('float32')
+    # def test_mapper(self, sample):
+    #     '''
+    #     map image path to type needed by model input layer for the test set
+    #     '''
+    #     img1, img2= sample
+    #     img1 = paddle.image.load_image(img1)
+    #     img1 = paddle.image.center_crop(img1, 128, is_color=True)
+    #     img2 = paddle.image.load_image(img2)
+    #     img3 = paddle.image.center_crop(img2, 128, is_color=True)
+    #
+    #     img1 = cv2.resize(img1, (self.imageSize, self.imageSize))
+    #     img2 = cv2.resize(img2, (self.imageSize, self.imageSize))
+    #     return img1.flatten().astype('float32'), img1.flatten().astype('float32')
 
     def train_reader(self, train_list, buffered_size=1024):
         def reader():
