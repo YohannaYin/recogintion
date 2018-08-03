@@ -9,4 +9,4 @@ facial_landmarks.py:用于预处理数据,将图片先剪裁成128*128大小,并
 params_pass_46.tar.gz:训练过程的产生参数,用于inference阶段
 shape_predictor_68_face_landmarks.dat: 68个人脸关键点
 paddle_face_baseline.py:训练模型
-infer.py:测试模型,可以直接粘贴到jupter notebook上运行
+infer.py:测试模型
