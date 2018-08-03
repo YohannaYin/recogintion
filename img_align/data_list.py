@@ -4,7 +4,7 @@ import numpy as np
 import paddle.v2 as paddle
 import random
 from multiprocessing import cpu_count
-from utils import *
+# from utils import *
 
 class MyReader:
     def __init__(self, imageSize, center_crop_size = 128):
